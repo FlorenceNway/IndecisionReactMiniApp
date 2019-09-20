@@ -11,6 +11,33 @@ class IndecisionApp extends React.Component {
         this.handleAddOption = this.handleAddOption.bind(this);
         this.handleDeleteOption = this.handleDeleteOption.bind(this);
     }
+    //fire when component gets first mounted to browser
+    componentDidMount() {
+        //fetching data
+        try {
+            const json = localStorage.getItem('options');
+            const options = JSON.parse(json); //to retrieve real javascript array back
+            if(options){
+                this.setState(() => ({options: options}))
+            }
+        } catch (e) {
+            console.log(e)
+        }
+        
+    }
+    //fire after the component update or after state/props values changed
+    componentDidUpdate(prevProps,prevState) {
+        //saving data
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            //save with Json strigify data so that number will not be saved as string
+            localStorage.setItem('options', json);
+        }
+    }
+    //fire when component goes away
+    componentWillUnmount() {
+        console.log('componentWillUnmount')
+    }
     handleDeleteOptions() {
         this.setState(() => ({options: []}))
     }
@@ -114,6 +141,7 @@ class Options extends React.Component {
     render() {
         return (
             <div>
+                {this.props.options.length === 0 && <p>Please add an option toget started</p>}
                 {
                   this.props.options.map((option)=>
                       <Option key={option} optionText={option} 
@@ -156,9 +184,12 @@ class AddOptions extends React.Component {
         const option = e.target.elements.option.value.trim();
         //trim from both sides of string '   hello  '
         const error = this.props.handleAddOption(option)
-        e.target.elements.option.value = '';
+
 
            this.setState(() => ({error})) 
+        if(!error) {
+            e.target.elements.option.value = '';
+        } 
         //    this.setState(()=>{
         //        return {error}
         //    })
