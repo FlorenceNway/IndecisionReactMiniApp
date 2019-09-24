@@ -18,6 +18,13 @@ module.exports = {
             test: /\.js$/, //look for and check file is loaded with .js
             exclude: /node_modules/ //dont want babel to run node modules,aldy set up we dont wanna change those modules files
             //take all the js files which are not in the node_modules folder
+        },{
+            test: /\.scss$/,
+            use: [//we use 'use' for array of loaders
+                'style-loader',
+                'css-loader',
+                'sass-loader'
+            ]
         }]
     },
     devtool: 'cheap-module-eval-source-map',//to show in console where the errors exists
@@ -29,4 +36,4 @@ module.exports = {
 //loader  - anytime webpack see js file, converting jsx to regular js
 //babel-core module - allow to use babel tools like babel,it doesn't have its functionality
 //   we still have to configure it to use the presets we've aldy picked out
-// babel-loader - wp plugin to teach wp how to run babel when wp see certain files
+// babel-loader - is wp plugin to teach wp how to run babel when wp see certain files
