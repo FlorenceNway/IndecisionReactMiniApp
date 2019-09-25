@@ -1,15 +1,15 @@
 import React from 'react';
 
-let style = {border: '1px solid grey'}
 const Option = (props) => {
     return (
-        <div>
-            {props.optionText}
-            <button onClick={(e) => {
+        <div className='option'>
+            <p className='option__text'>{props.count}. {props.optionText}</p>
+            <button className='button button--link'
+                onClick={(e) => {
                 props.handleDeleteOption(props.optionText)}
             } //not direct function call, create event function so that can pass the argument(option)
-                    style={style}>
-                X
+                    >
+                Remove
             </button>
         </div>
     )

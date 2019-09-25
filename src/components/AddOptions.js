@@ -1,7 +1,5 @@
 import React from 'react';
 
-let style = {border: '1px solid grey'}
-
 export default class AddOptions extends React.Component {
     constructor(props){
         super(props);
@@ -16,7 +14,6 @@ export default class AddOptions extends React.Component {
         //trim from both sides of string '   hello  '
         const error = this.props.handleAddOption(option)
 
-
            this.setState(() => ({error})) 
         if(!error) {
             e.target.elements.option.value = '';
@@ -25,10 +22,10 @@ export default class AddOptions extends React.Component {
     render() {
         return (
             <div>
-                {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.handleAddOption}>
-                    <input type='text' name='option' style={style}/>
-                    <button style={style}>Add Option</button>
+                {this.state.error && <p className='add-option-error'>{this.state.error}</p>}
+                <form onSubmit={this.handleAddOption} className='add-option'>
+                    <input type='text' name='option'className='add-option__input'/>
+                    <button className='button'>Add Option</button>
                 </form>
                 
             </div>

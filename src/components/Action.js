@@ -1,10 +1,10 @@
 import React from 'react';
 
-let style = {border: '1px solid grey'}
+//let style = {border: '1px solid grey'}
 
 const Action = (props) => (
     <div>
-        <button style={style} 
+        <button className='big-button' 
         onClick={props.handlePick} disabled={!props.hasOptions}>
             What should I do?
         </button>

@@ -17,11 +17,6 @@ export default class IndecisionApp extends React.Component {
     handleDeleteOptions = () => {
         this.setState(() => ({options: []}))
     }
-    handleClearSelectedOption = () => {
-        this.setState(() => ({
-            selectedOption: undefined
-        }))
-    }
     handleDeleteOption = (optiontoRemove) => {
         this.setState((prevState)=> ({
             options: prevState.options.filter((option) => {
@@ -29,6 +24,22 @@ export default class IndecisionApp extends React.Component {
             })
         }));
     }
+//When click 'what should I do button'
+    handlePick = () => {
+        const randompick = Math.floor(Math.random(this.state.options) * this.state.options.length);//want to know index and limit the index not to beyond length of array
+        const option = this.state.options[randompick];
+        this.setState(() =>({
+            selectedOption: option
+        }))
+    }
+    //modal box , click okay or esc or background
+    handleClearSelectedOption = () => {
+        this.setState(() => ({
+            selectedOption: undefined
+        }))
+    }
+
+    //When click 'Add Option button'
     handleAddOption = (option) => {
         if (!option) {
             return 'Enter valid value to add item';
@@ -38,16 +49,9 @@ export default class IndecisionApp extends React.Component {
         }
         this.setState((prevState) => ({
             options: prevState.options.concat([option])
-        }));
-        
+        }));  
     }
-    handlePick = () => {
-        const randompick = Math.floor(Math.random(this.state.options) * this.state.options.length);
-        const option = this.state.options[randompick];
-        this.setState(() =>({
-            selectedOption: option
-        }))
-    }
+    
 
     //fire when component gets first mounted to browser
     componentDidMount() {
@@ -62,7 +66,6 @@ export default class IndecisionApp extends React.Component {
             //Do nothing
             console.log(e)
         }
-        
     }
     //fire after the component update or after state/props values changed
     componentDidUpdate(prevProps,prevState) {
@@ -85,12 +88,17 @@ export default class IndecisionApp extends React.Component {
         return(
                 <div>
                     <Header subtitle={subtitle}/>
-                    <Action hasOptions={this.state.options.length > 0}
-                            handlePick = {this.handlePick}/>
-                    <Options options = {this.state.options} 
-                            handleDeleteOptions={this.handleDeleteOptions}
-                            handleDeleteOption={this.handleDeleteOption}/>
-                    <AddOptions handleAddOption={this.handleAddOption}/>
+                    <div className='container'>
+                        <Action hasOptions={this.state.options.length > 0}
+                                handlePick = {this.handlePick}/>
+                        <div className='widget'>
+                            <Options options = {this.state.options} 
+                                    handleDeleteOptions={this.handleDeleteOptions}
+                                    handleDeleteOption={this.handleDeleteOption}/>
+                            <AddOptions handleAddOption={this.handleAddOption}/>
+                        </div>    
+                                
+                    </div>
                     <OptionModal 
                             selectedOption={this.state.selectedOption}
                             handleClearSelectedOption={this.handleClearSelectedOption}
