@@ -1,4 +1,9 @@
-$brand-color: blue;
-* {
-    color: $brand-color;
-}
+@import './base/settings'; //should be on all of top
+@import './base/base'; //no need to include _
+@import './components/header';
+@import './components/container';
+@import './components/button';
+@import './components/widget';
+@import './components/option';
+@import './components/add-option';
+@import './components/modal';
