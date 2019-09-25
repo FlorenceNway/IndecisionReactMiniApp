@@ -1,12 +1,12 @@
 .header {
     background: $off-black;
     color:white;
-    margin-bottom: $xl-size;
+    margin-bottom: $l-size;
     padding: 1.6rem 0;
 }
 //BEM block element modifier (naming convention)
 .header__title {
-    font-size: $l-size;
+    font-size: $m-size;
     margin: 0;
 }
 
@@ -15,4 +15,16 @@
     font-size: $m-size;
     font-weight: 500;
     margin: 0;
+}
+
+@media (min-wdth: $desktop-breakpoint) {
+    .header {
+        margin-bottom: $xl-size
+    }
+    .header__title {
+        font-size: $l-size;
+    }
+    .header__subtitle {
+        font-size: $m-size;
+    }
 }

@@ -31,3 +31,9 @@
     color: $off-white;
     padding: 0;
 }
+
+@media (min-width:45rem) {
+    .big-button {
+        margin-bottom: $xl-size;
+    }
+}
