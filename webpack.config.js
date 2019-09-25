@@ -25,6 +25,12 @@ module.exports = {
                 'css-loader',
                 'sass-loader'
             ]
+        },{
+            test: /\.css$/,
+            use: [//we use 'use' for array of loaders
+                'style-loader',
+                'css-loader'
+            ]
         }]
     },
     devtool: 'cheap-module-eval-source-map',//to show in console where the errors exists
@@ -37,3 +43,5 @@ module.exports = {
 //babel-core module - allow to use babel tools like babel,it doesn't have its functionality
 //   we still have to configure it to use the presets we've aldy picked out
 // babel-loader - is wp plugin to teach wp how to run babel when wp see certain files
+// sass-loader=babel-loader - allow us to import sass files
+// node-sass=babel-core - takes sass or scss codes and converts it in to regular css
